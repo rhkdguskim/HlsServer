@@ -14,7 +14,7 @@
 - 카메라 PTZ 제어
 
 ## FFmag
-- RTPS -> HLS
+- MP4 -> HLS
 - HLS 프로토콜을 위한 m3u8 파일 생성
 
 ## TO Usageage
