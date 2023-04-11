@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera</title>
+
+</head>
+<body>
+
+  <form action="/SearchCam" method="POST">
+    <label>timeout
+      <input type="text" name="timeout" />
+    </label>
+    <br>
+    <button type="submit">Search Restart</button>
+  </form>
+
+  <form action="/SearchCam" method="GET">
+    <button type="submit">Refresh</button>
+  </form>
+  <script>
+chartData = JSON.parse('<%- JSON.stringify(locals.DataList.SearchCamlist) %>'); 
+ for(let i=0; i<chartData.length; i++)
+ {
+  document.write(`<h3>${chartData[i].address}</h3>`)
+  document.write(chartData[i].name+'<br>')
+  document.write(chartData[i].hardware)
+ }
+  </script>
+  
+</body>
+</html>

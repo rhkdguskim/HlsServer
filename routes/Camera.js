@@ -24,6 +24,7 @@ router.get("/add", (req, res) => {
 router.post("/add", (req, res) => {
     console.log(req.body.camname, req.body.hostname,req.body.username,req.body.password, req.body.port);
     NewCam(req.body.camname, req.body.hostname,req.body.username,req.body.password, req.body.port);
+    res.redirect("/camera")
  })
 
  
@@ -34,10 +35,11 @@ router.get("/addmp4", (req, res) => {
  router.post("/addmp4", (req, res) => {
     console.log(req.body.filename, req.body.filepath);
     NewCamMp4(req.body.filename, req.body.filepath);
+    res.redirect("/camera")
  })
 
  router.get("/live", (req, res) => {
-    res.render("../camera/live", { camname: req.query.camname })
+    res.render("../camera/live", {DataList : {"camname":req.query.camname,"cameralist":MyCameraList , "mp4list":Mymp4List}})
   })
 
   router.get("/camlist", (req, res) => {

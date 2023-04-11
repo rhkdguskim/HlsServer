@@ -15,17 +15,34 @@
       <input type="text" name="camname" />
     </label>
     <br>
-    <button type="submit">Start Live</button>
+    <button type="submit">Input your Live Name</button>
   </form>
   
-  <h1><%= locals.camname %></h1>
+  <h1><%= locals.DataList.camname %></h1>
+
+  
 
   <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="268" 
   data-setup='{}'>
-    <source src="/<%= locals.camname %>/play.m3u8" type="application/x-mpegURL">
+    <source src="/<%= locals.DataList.camname %>/play.m3u8" type="application/x-mpegURL">
   </video>
   
   <script>
+    CameraData = JSON.parse('<%- JSON.stringify(locals.DataList.cameralist) %>'); 
+    mp4Data = JSON.parse('<%- JSON.stringify(locals.DataList.mp4list) %>'); 
+
+document.write(`<h3>CameraList</h3>`)
+ for(let i=0; i<CameraData.length; i++)
+ {
+  document.write(`<a href="/camera/live?camname=${CameraData[i].camname}">${CameraData[i].camname}</a><br>`)
+ }
+
+ document.write(`<h3>MP4 List</h3>`)
+ for(let i=0; i<mp4Data.length; i++)
+ {
+  document.write(`<a href="/camera/live?camname=${mp4Data[i].filename}">${mp4Data[i].filename}</a><br>`)
+ }
+
   </script>
   
 </body>

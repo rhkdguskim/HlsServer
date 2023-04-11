@@ -48,12 +48,12 @@ onvif.Discovery.on('device', function(cam, rinfo, xml) {
 })
 
 router.get("/", (req, res) => {
-    res.send(SearchCamlist);
+    res.render("../searchcam/index" , {DataList : {"SearchCamlist":SearchCamlist}});
  })
 
  router.post("/", (req, res) => {
-    onvif.Discovery.probe(req.query.timeout);
-    res.redirect("/");
+    SearchCamlist = [];
+    onvif.Discovery.probe(req.body.timeout);
  })
 
 module.exports = router;
