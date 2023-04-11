@@ -23,3 +23,11 @@
 - Open in Terminal
 - npm install
 - npm run devStart
+
+## URLS
+- host:port/searchcam
+- host:port/camera/
+- host:port/camera/add
+- host:port/camera/live?camname="name"
+- host:port/camera/camlist
+
