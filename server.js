@@ -36,18 +36,3 @@ app.use(express.static("hls"))
 app.listen(8000, function(){
     console.log("8000 port is listening!! ");
 });
-
-
-app.get("/",(res,req) => {
-    console.log("Hello World!! ");
-})
-
-app.get("/user",(res,req) => {
-    req.send("Hello World User");
-    console.log("Hello World User!! ");
-})
-
-app.get("/test",(res,req) => {
-    req.send("Hello World test");
-    console.log("Hello World test!! ");
-})
