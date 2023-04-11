@@ -16,3 +16,10 @@
 ## FFmag
 - RTPS -> HLS
 - HLS 프로토콜을 위한 m3u8 파일 생성
+
+## TO Usageage
+- Visual Studio Code에 폴더 지정
+- node.js 설치 ( node, npm 필요 )
+- Open in Terminal
+- npm install
+- npm run devStart
