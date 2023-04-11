@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
-<title>Web Streaming</title>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- 최신버전 Alpha를 이용하고 싶다면 아래 스크립트를 사용 -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@alpha"></script> -->
+<meta charset=utf-8 />
+<title>videojs-contrib-hls embed</title>
+
+  <link href="/video-js.css" rel="stylesheet">
+  <script src="/video.js"></script>
+  <script src="/videojs-contrib-hls.js"></script>
+
 </head>
-
 <body>
-
   <form action="live" method="GET">
     <label>CamName
       <input type="text" name="camname" />
@@ -18,32 +17,16 @@
     <br>
     <button type="submit">Start Live</button>
   </form>
+  
+  <h1><%= locals.camname %></h1>
 
-    <video id="video" width="500" height="500" controls></video>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-      var video = document.getElementById('video');
-      var videoSrc = '/<%= locals.camname %>/play.m3u8';
-     if (Hls.isSupported()) 
-     {
-      var hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-      hls.on(Hls.Event.MANIFEST_PARSED, ()=> {
-        video.play();
-      });
-     } else if(video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = videoSrc;
-        video.addEventListener('loadedmetadata', () => {
-          video.play();
-        });
-     }
-     else
-     {
-      alert("error");
-     }
-      
-    </script>
-
+  <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="268" 
+  data-setup='{}'>
+    <source src="/<%= locals.camname %>/play.m3u8" type="application/x-mpegURL">
+  </video>
+  
+  <script>
+  </script>
+  
 </body>
 </html>

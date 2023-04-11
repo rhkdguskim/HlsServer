@@ -37,7 +37,7 @@ router.get("/addmp4", (req, res) => {
  })
 
  router.get("/live", (req, res) => {
-    res.render("../camera/live2", { camname: req.query.camname })
+    res.render("../camera/live", { camname: req.query.camname })
   })
 
   router.get("/camlist", (req, res) => {
