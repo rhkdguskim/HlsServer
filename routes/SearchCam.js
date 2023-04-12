@@ -5,6 +5,8 @@ var onvif = require('onvif');
 var xml2js = require('xml2js')
 var stripPrefix = require('xml2js').processors.stripPrefix;
 
+var os = require('os');
+
 let SearchCamlist = [];
 
 onvif.Discovery.on('error', function(err,xml) {
@@ -12,7 +14,18 @@ onvif.Discovery.on('error', function(err,xml) {
 	console.log('Discovery error ' + err);
 });
 
-onvif.Discovery.probe();
+var networklist = [];
+var interfaces = os.networkInterfaces();
+
+for(eth in interfaces)
+{
+    networklist.push({name:eth});
+}
+
+var options = {device : networklist[0].name};
+onvif.Discovery.probe(options);
+
+
 
 onvif.Discovery.on('device', function(cam, rinfo, xml) {
     // Function will be called as soon as the NVT responses
@@ -48,12 +61,19 @@ onvif.Discovery.on('device', function(cam, rinfo, xml) {
 })
 
 router.get("/", (req, res) => {
-    res.render("../searchcam/index" , {DataList : {"SearchCamlist":SearchCamlist}});
+    networklist = [];
+    interfaces = os.networkInterfaces();
+    for(eth in interfaces)
+    {
+        networklist.push({name:eth});
+    }
+    res.render("../searchcam/index" , {DataList : {"SearchCamlist":SearchCamlist, "Networklist":networklist}});
  })
 
  router.post("/", (req, res) => {
     SearchCamlist = [];
-    onvif.Discovery.probe(req.body.timeout);
+    var options = {device : networklist[req.body.eth].name, timeout : req.body.timeout};
+    onvif.Discovery.probe(options);
  })
 
 module.exports = router;

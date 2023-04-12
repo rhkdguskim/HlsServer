@@ -13,10 +13,20 @@
     <label>timeout
       <input type="text" name="timeout" />
     </label>
-    <br>
+    <select name="eth">
+      <script>
+    networklist = JSON.parse('<%- JSON.stringify(locals.DataList.Networklist) %>'); 
+    
+    console.log(networklist);
+    for(let i=0; i<networklist.length; i++)
+     {
+      document.write(`<option value='${i}'>${networklist[i].name}</option>`)
+     }
+      </script>
+    </select>
     <button type="submit">Search Restart</button>
   </form>
-
+  <br>
   <form action="/SearchCam" method="GET">
     <button type="submit">Refresh</button>
   </form>
@@ -24,11 +34,10 @@
 chartData = JSON.parse('<%- JSON.stringify(locals.DataList.SearchCamlist) %>'); 
  for(let i=0; i<chartData.length; i++)
  {
-  document.write(`<h3>${chartData[i].address}</h3>`)
+  document.write(`<h2>${chartData[i].address}</h2>`)
   document.write(chartData[i].name+'<br>')
   document.write(chartData[i].hardware)
  }
-  </script>
-  
+</script>  
 </body>
 </html>
