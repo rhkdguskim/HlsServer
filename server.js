@@ -32,6 +32,10 @@ app.use("/SearchCam",searchCam);
 app.use("/Camera",addCam);
 app.use(express.static("hls"))
 
+app.get('/', (req,res) => {
+  res.send("<a href='/Camera'>카메라관리</a><br><a href='/SearchCam'>카메라스캔</a>");
+});
+
 
 app.listen(8000, function(){
     console.log("8000 port is listening!! ");
