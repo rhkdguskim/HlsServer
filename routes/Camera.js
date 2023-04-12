@@ -72,15 +72,18 @@ router.get("/addmp4", (req, res) => {
         }
         console.log('Camera is Connected');
         this.getStreamUri({protocol: 'RTSP'}, function(err, stream) {
-            console.log(stream.uri);
+          stream.uri = stream.uri.slice(7);
+          stream.uri = `rtsp://${username}:${password}@`+ stream.uri;
+          console.log(stream.uri);
 
             fs.mkdir(`hls/${camname}`, (err) => {
-                if (err) throw err;
+                if (err)
+                 console.log("dir is already exsist");
               });
             
-            const command = ffmpeg(stream.uri)
+            const command = ffmpeg(stream.uri,{timeout:432000})
             .outputOptions([
-                '-hls_time 15',
+                '-hls_time 5',
                 `-hls_segment_filename hls/${camname}/%03d.ts`,
                 '-f hls'
             ])
@@ -112,9 +115,9 @@ router.get("/addmp4", (req, res) => {
 
     const command = ffmpeg(filepath)
     .outputOptions([
-        '-hls_time 15',
-        `-hls_segment_filename hls/${filename}/%03d.ts`,
-        '-f hls'
+      '-hls_time 5',
+      `-hls_segment_filename hls/${camname}/%03d.ts`,
+      '-f hls'
     ])
     .output(`hls/${filename}/play.m3u8`)
     .on('start', function() {
